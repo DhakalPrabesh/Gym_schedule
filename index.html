@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Progress Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gym Progress Tracker</h1>
+            <nav>
+                <button class="nav-btn active" data-section="calendar">Calendar</button>
+                <button class="nav-btn" data-section="progress">Progress</button>
+                <button class="nav-btn" data-section="goals">Goals</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Calendar Section -->
+            <section id="calendar" class="section active">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button id="prevMonth">&lt;</button>
+                        <h2 id="currentMonth">January 2024</h2>
+                        <button id="nextMonth">&gt;</button>
+                    </div>
+                    <div class="weekdays">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div id="calendar-days" class="calendar-days"></div>
+                    <div class="day-options" style="display: none;">
+                        <h3>Day Options</h3>
+                        <button class="workout-btn">Mark as Workout</button>
+                        <button class="leave-btn">Mark as Leave</button>
+                        <textarea id="dayNotes" placeholder="Add notes for this day..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section id="progress" class="section">
+                <div class="progress-container">
+                    <div class="progress-form">
+                        <h2>Track Your Progress</h2>
+                        <form id="progressForm">
+                            <div class="form-group">
+                                <label for="height">Height (cm):</label>
+                                <input type="number" 
+                                       id="height" 
+                                       step="1" 
+                                       min="50" 
+                                       max="300" 
+                                       placeholder="Enter height (e.g., 175)"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="weight">Weight (kg):</label>
+                                <input type="number" 
+                                       id="weight" 
+                                       step="0.1" 
+                                       min="1" 
+                                       max="500" 
+                                       placeholder="Enter weight (e.g., 70.5)"
+                                       required>
+                            </div>
+                            <button type="submit">Calculate BMI</button>
+                        </form>
+                        <div id="bmiResult" class="bmi-result" style="display: none;">
+                            <div class="bmi-image-container">
+                                <img id="bmiImage" class="bmi-image" src="" alt="BMI Category Image">
+                            </div>
+                            <div class="bmi-details">
+                                <p id="bmiValue"></p>
+                                <p id="bmiCategory" class="bmi-category"></p>
+                            </div>
+                            <div id="recommendations" class="recommendations"></div>
+                        </div>
+                    </div>
+                    <div class="progress-chart">
+                        <h2>Weight Progress</h2>
+                        <canvas id="weightChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goals Section -->
+            <section id="goals" class="section">
+                <div class="goals-container">
+                    <div class="goals-form">
+                        <h2>Set New Goal</h2>
+                        <form id="goalForm">
+                            <div class="form-group">
+                                <label for="targetWeight">Target Weight (kg):</label>
+                                <input type="number" id="targetWeight" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="targetBMI">Target BMI:</label>
+                                <input type="number" id="targetBMI" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="targetDate">Target Date:</label>
+                                <input type="date" id="targetDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="goalNotes">Notes:</label>
+                                <textarea id="goalNotes"></textarea>
+                            </div>
+                            <button type="submit">Add Goal</button>
+                        </form>
+                    </div>
+                    <div class="goals-list">
+                        <h2>Your Goals</h2>
+                        <div id="goalsList"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="tooltip" id="tooltip">
+        <p>Click on any day to mark it as a workout or leave day. Add notes to track your progress!</p>
+        <button onclick="this.parentElement.style.display='none'">Got it!</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
